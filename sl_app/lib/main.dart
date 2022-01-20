@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sl_app/core/ui-components/theme/colors.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:sl_app/routes/router.gr.dart';
@@ -73,7 +74,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                 ),
                 Text(
                   "Sign Language App",
-                  style: TextStyle(
+                  style: GoogleFonts.montserrat(
                     fontSize: getProportionateScreenWidth(context, 34),
                     color: primaryColor,
                     fontWeight: FontWeight.bold,

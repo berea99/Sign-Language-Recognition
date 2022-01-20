@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sl_app/core/ui-components/theme/colors.dart';
 import 'package:sl_app/core/ui-components/theme/sized_config.dart';
 import 'package:auto_route/auto_route.dart';
@@ -18,102 +19,187 @@ class _SectionsScreenState extends State<SectionsScreen> {
   bool pressBotton2 = false;
   @override
   Widget build(BuildContext context) {
+    var appBar = AppBar(
+      toolbarHeight: 100,
+      title: Text('Sign Language App'),
+      centerTitle: true,
+      backgroundColor: Colors.transparent,
+    );
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Sign Language App'),
-        centerTitle: true,
-        backgroundColor: primaryColor,
+      extendBodyBehindAppBar: true,
+      appBar: PreferredSize(
+        preferredSize: appBar.preferredSize,
+        child: Theme(data: themeDataDark, child: appBar),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: Stack(
+        fit: StackFit.expand,
         children: [
-          Spacer(
-            flex: 2,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          Container(color: primaryColor),
+          Column(
             children: [
-              Column(
-                children: [
-                  Text(
-                    'Real Time',
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: primaryColor,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: OutlinedButton(
-                      onPressed: () async {
-                        var cameras = await loadCameras();
-
-                        await electionDialog();
-                      },
-                      child: Icon(
-                        Icons.camera,
-                        color: primaryColor,
-                        size: 80,
-                      ),
-                      style: OutlinedButton.styleFrom(
-                          elevation: pressBotton1 ? 0 : 10,
-                          backgroundColor: Colors.white,
-                          shadowColor: primaryColor,
-                          side: BorderSide(color: primaryColor, width: 2),
-                          fixedSize: Size(
-                              MediaQuery.of(context).size.width / 2 - 16,
-                              getProportionateScreenHeight(context, 265))),
-                    ),
-                  ),
-                ],
+              SizedBox(
+                height: AppBar().preferredSize.height,
               ),
-              Column(
-                children: [
-                  Text(
-                    'Foto de la Galería',
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: primaryColor,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: OutlinedButton(
-                      onPressed: () {
-                        setState(() {
-                          pressBotton2 = !pressBotton2;
-                          context.router.push(GalleryRouteWithCubit());
-                          pressBotton2 = !pressBotton2;
-                        });
-                      },
-                      child: Icon(
-                        Icons.photo_library,
-                        color: primaryColor,
-                        size: 80,
+              Expanded(
+                child: Container(
+                  color: primaryColor,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        top: 0.1 * MediaQuery.of(context).size.height),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(8.0),
+                            topRight: Radius.circular(8.0)),
                       ),
-                      style: OutlinedButton.styleFrom(
-                          elevation: pressBotton2 ? 0 : 10,
-                          backgroundColor: Colors.white,
-                          shadowColor: primaryColor,
-                          side: BorderSide(color: primaryColor, width: 2),
-                          fixedSize: Size(
-                              MediaQuery.of(context).size.width / 2 - 16,
-                              getProportionateScreenHeight(context, 265))),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Spacer(
+                            flex: 1,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                'Options:',
+                                style: appTextTheme.headline1,
+                              ),
+                            ),
+                          ),
+                          Spacer(
+                            flex: 1,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: ElevatedButton(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Image.asset(
+                                          'assets/images/hand3d.png',
+                                          height: 100,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(20.0),
+                                        child: Text(
+                                          'Real Time',
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  style: ButtonStyle(
+                                      fixedSize:
+                                          MaterialStateProperty.all<Size>(
+                                        Size(
+                                            MediaQuery.of(context).size.width /
+                                                    2 -
+                                                16,
+                                            getProportionateScreenHeight(
+                                                context, 265)),
+                                      ),
+                                      foregroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                              Colors.black),
+                                      backgroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                              complementary),
+                                      shape: MaterialStateProperty.all<
+                                              RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              side: BorderSide(
+                                                  color: Colors.white)))),
+                                  onPressed: () async {
+                                    var cameras = await loadCameras();
+
+                                    await electionDialog();
+                                  },
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: ElevatedButton(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Image.asset(
+                                          'assets/images/camera.png',
+                                          height: 100,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(20.0),
+                                        child: Text(
+                                          'Gallery',
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  style: ButtonStyle(
+                                      fixedSize:
+                                          MaterialStateProperty.all<Size>(
+                                        Size(
+                                            MediaQuery.of(context).size.width /
+                                                    2 -
+                                                16,
+                                            getProportionateScreenHeight(
+                                                context, 265)),
+                                      ),
+                                      foregroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                              Colors.black),
+                                      backgroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                              complementary2),
+                                      shape: MaterialStateProperty.all<
+                                              RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              side: BorderSide(
+                                                  color: Colors.white)))),
+                                  onPressed: () async {
+                                    context.router
+                                        .push(GalleryRouteWithCubit());
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                          Spacer(
+                            flex: 6,
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ],
+                ),
               ),
             ],
-          ),
-          Spacer(
-            flex: 1,
-          ),
-          Text(
-            'Seleccione una de las dos opciones',
-            style: TextStyle(fontSize: 20, color: primaryColor),
-          ),
-          Spacer(
-            flex: 3,
           ),
         ],
       ),
@@ -143,66 +229,116 @@ class _SectionsScreenState extends State<SectionsScreen> {
                   child: Wrap(
                     alignment: WrapAlignment.spaceEvenly,
                     children: [
-                      Text('Escoge una Opción:'),
+                      Text(
+                        'Real Time Options:',
+                        style: appTextTheme.subtitle1,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: OutlinedButton(
-                              onPressed: () async {
-                                var cameras = await loadCameras();
-                                setState(() {
-                                  context.router
-                                      .push(LiveRoute(cameras: cameras));
-                                });
-                              },
-                              child: Text(
-                                'Sign Language To Text',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    color: primaryColor,
-                                    fontWeight: FontWeight.bold),
+                            child: ElevatedButton(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Image.asset(
+                                      'assets/images/hand3d2.png',
+                                      height: 100,
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.arrow_downward_rounded,
+                                    color: Colors.white,
+                                  ),
+                                  Text(
+                                    'Text'.toUpperCase(),
+                                    style: GoogleFonts.montserrat(
+                                      color: Colors.white,
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 0.25,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              style: OutlinedButton.styleFrom(
-                                  elevation: pressBotton1 ? 0 : 10,
-                                  backgroundColor: Colors.white,
-                                  shadowColor: primaryColor,
-                                  side:
-                                      BorderSide(color: primaryColor, width: 2),
-                                  fixedSize: Size(
+                              style: ButtonStyle(
+                                  fixedSize: MaterialStateProperty.all<Size>(Size(
                                       MediaQuery.of(context).size.width / 3,
                                       getProportionateScreenHeight(
                                           context, 265))),
+                                  foregroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.black),
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          complementary3),
+                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
+                                          side: BorderSide(color: Colors.white)))),
+                              onPressed: () async {
+                                var cameras = await loadCameras();
+
+                                context.router
+                                    .push(LiveRoute(cameras: cameras));
+                              },
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: OutlinedButton(
-                              onPressed: () {
-                                setState(() {
-                                  context.router.push(WordToSlRouteWithCubit());
-                                });
-                              },
-                              child: Text(
-                                'Text To Sign Language',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    color: primaryColor,
-                                    fontWeight: FontWeight.bold),
+                            child: ElevatedButton(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Text'.toUpperCase(),
+                                    style: GoogleFonts.montserrat(
+                                      color: Colors.white,
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 0.25,
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.arrow_downward_rounded,
+                                    color: Colors.white,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Image.asset(
+                                      'assets/images/hand3d2.png',
+                                      height: 100,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              style: OutlinedButton.styleFrom(
-                                  elevation: pressBotton2 ? 0 : 10,
-                                  backgroundColor: Colors.white,
-                                  shadowColor: primaryColor,
-                                  side:
-                                      BorderSide(color: primaryColor, width: 2),
-                                  fixedSize: Size(
+                              style: ButtonStyle(
+                                  fixedSize: MaterialStateProperty.all<Size>(Size(
                                       MediaQuery.of(context).size.width / 3,
                                       getProportionateScreenHeight(
                                           context, 265))),
+                                  foregroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.black),
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          complementary4),
+                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
+                                          side: BorderSide(color: Colors.white)))),
+                              onPressed: () async {
+                                context.router.push(WordToSlRouteWithCubit());
+                              },
                             ),
-                          ),
+                          )
                         ],
                       ),
                     ],
