@@ -39,17 +39,17 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
 
   List<Map<String, String>> splashData = [
     {
-      "text": "Bievenido a Sign Language App",
+      "text": "Welcome to Sign Language App",
       "image": "assets/images/sl_image.png"
     },
     {
       "text":
-          "Puedes seleccionar una imagen de la galeria para poder saber cual es el signo que se está representando",
+          "You can select a image from your gallery for know which sign is being representied",
       "image": "assets/images/galeria.PNG"
     },
     {
       "text":
-          "Puedes también grabar los signos que estas haciendo tu o alguien para saber los signos en tiempo real",
+          "You can also record the signs that you or someone else are doing to know the signs in real time",
       "image": "assets/images/video.jpg"
     },
   ];
@@ -121,7 +121,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.router.push(SectionsRoute()),
-        tooltip: 'Continuar',
+        tooltip: 'Continue',
         child: Icon(Icons.arrow_forward),
         backgroundColor: primaryColor,
       ), // This trailing comma makes auto-formatting nicer for build methods.

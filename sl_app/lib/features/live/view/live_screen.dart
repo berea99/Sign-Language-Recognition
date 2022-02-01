@@ -19,11 +19,11 @@ class _LiveScreenState extends State<LiveScreen> {
   List<dynamic>? _recognitions;
   int _imageHeight = 0;
   int _imageWidth = 0;
-  String _model = "assets/model/model_app_no_mask.tflite";
+  String _model = "assets/model/model_complete.tflite";
 
   loadModel() async {
     await Tflite.loadModel(
-      model: "assets/model/model_app_no_mask.tflite",
+      model: "assets/model/model_complete.tflite",
       labels: "assets/model/labels.txt",
     );
   }
@@ -66,25 +66,6 @@ class _LiveScreenState extends State<LiveScreen> {
               screen.height,
               screen.width,
               _model),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Container(
-                alignment: Alignment.bottomCenter,
-                height: 40,
-                width: MediaQuery.of(context).size.width,
-                color: Colors.white,
-                child: Text(
-                  _recognitions != null
-                      ? _recognitions!.isNotEmpty
-                          ? '${_recognitions![0]['detectedClass']}'
-                          : ''
-                      : '',
-                  style: TextStyle(color: primaryColor),
-                ),
-              ),
-            ],
-          )
         ],
       ),
     );

@@ -103,3 +103,5 @@ flutter:
     - assets/model/model_s.tflite
     - assets/model/model_app.tflite
     - assets/model/model_app_no_mask.tflite
+    - assets/model/model_app_mask_complete.tflite
+    - assets/model/model_complete.tflite

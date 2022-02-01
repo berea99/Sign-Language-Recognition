@@ -26,7 +26,7 @@ class GalleryCubit extends Cubit<GalleryState> {
 
   void loadModel() async {
     await Tflite.loadModel(
-        model: 'assets/model/model_app_no_mask.tflite',
+        model: 'assets/model/model_complete.tflite',
         labels: 'assets/model/labels.txt');
   }
 

@@ -24,6 +24,3 @@ W
 X
 Y
 Z
-nothing
-space
-delete
