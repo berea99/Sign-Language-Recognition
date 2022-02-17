@@ -70,6 +70,9 @@ class _GalleryScreenState extends State<GalleryScreen> {
   }
 
   Widget loadedUI(bool loading, {File? image, List? result}) {
+    String? percentage;
+    if (result != null)
+      percentage = (result[0]['confidence'] * 100 as double).toStringAsFixed(2);
     return Stack(
       fit: StackFit.expand,
       children: [
@@ -152,7 +155,8 @@ class _GalleryScreenState extends State<GalleryScreen> {
                                             height: 10,
                                           ),
                                           result != null
-                                              ? Text('${result[0]['label']}',
+                                              ? Text(
+                                                  '${result[0]['label']}: $percentage %',
                                                   style: appTextTheme.headline1)
                                               : Container(),
                                           Divider(
