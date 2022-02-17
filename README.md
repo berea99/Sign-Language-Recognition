@@ -23,7 +23,6 @@ App for the recognition of the signs of the ASL (American Sign Language), both f
 </li>
 </ul>
 </li>
-<li><a href="proyecto_antiguo_speaker_recognition">C&oacute;digo del proyecto anterior Speaker Recognition</a></li>
 <li><a href="Informes">Informes</a>
 <ul>
 <li><a href="Informes/InformeInicial.pdf">Informe inicial&nbsp;</a></li>
